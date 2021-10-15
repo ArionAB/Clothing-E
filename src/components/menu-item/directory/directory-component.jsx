@@ -48,8 +48,8 @@ class Directory extends React.Component {
   render() {
     return (
       <div className="directory-menu">
-        {this.state.sections.map(({ title, imageUrl, id, size }) => (
-          <MenuItem key={id} title={title} image={imageUrl} size={size} />
+        {this.state.sections.map(({ id, ...otherSectionProps }) => (
+          <MenuItem key={id} {...otherSectionProps} />
         ))}
       </div>
     );
@@ -57,3 +57,12 @@ class Directory extends React.Component {
 }
 
 export default Directory;
+
+// same thing as above code but using ...instead of all of them
+/* {this.state.sections.map(({ title, imageUrl, id, size, linkUrl }) => (
+  <MenuItem
+    key={id}
+    title={title}
+    image={imageUrl}
+    size={size}
+    linkUrl={linkUrl} */
