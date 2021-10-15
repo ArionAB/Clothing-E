@@ -2,14 +2,14 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "./menu-item.styles.scss";
 
-const MenuItem = ({ title, image, size, history, linkUrl, match }) => (
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
   <div
     className={`${size} menu-item`}
     onClick={() => history.push(`${match.url}${linkUrl}`)}
   >
     <div
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${imageUrl})`,
       }}
       className="background-image"
     />
@@ -22,3 +22,5 @@ const MenuItem = ({ title, image, size, history, linkUrl, match }) => (
 );
 
 export default withRouter(MenuItem);
+// Higher order component just a function that takes another component as an argument
+// transform it into another component and returns that transformed component out of itself
