@@ -37,8 +37,7 @@ class App extends React.Component {
               },
             },
             () => {
-              console.log(this.state); //made a callback because this.setState is async so we have to wait
-              // for results otherwise it will be null
+              console.log(this.state);
             }
           );
         });
