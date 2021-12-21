@@ -5,9 +5,11 @@ import { ShopPage } from "./pages/Shop/shop.component";
 import Header from "./components/header/header.component";
 import SigninAndSignUpPage from "./pages/Sign-in-up/sign-in-up";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
@@ -45,8 +47,11 @@ const App = ({ setCurrentUser, currrentUser }) => {
     </div>
   );
 };
-const mapStateToProps = ({ user }) => ({
-  currrentUser: user.currrentUser,
+/* const mapStateToProps = (state) => ({
+  currrentUser: selectCurrentUser(state),
+}); */
+const mapStateToProps = createStructuredSelector({
+  currrentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
