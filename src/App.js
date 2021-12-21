@@ -2,8 +2,10 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/homepage/homepage.component";
 import { ShopPage } from "./pages/Shop/shop.component";
-import Header from "./components/header/header.component";
+import CheckoutPage from "./pages/checkout/checkout";
 import SigninAndSignUpPage from "./pages/Sign-in-up/sign-in-up";
+import Header from "./components/header/header.component";
+
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -43,6 +45,7 @@ const App = ({ setCurrentUser, currrentUser }) => {
             currrentUser ? <Redirect to="/" /> : <SigninAndSignUpPage />
           }
         />
+        <Route exact path="/checkout" component={CheckoutPage} />
       </Switch>
     </div>
   );

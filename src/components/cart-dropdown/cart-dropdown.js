@@ -2,18 +2,32 @@ import { CustomButton } from "../custom-button/custom-button.component";
 import { CartItem } from "../cart-item/cart-item";
 import { connect } from "react-redux";
 import { selectCartItems } from "../../redux/Cart/cart.selectors";
-import { createSelectorCreator, createStructuredSelector } from "reselect";
+import { createStructuredSelector } from "reselect";
+import { withRouter } from "react-router-dom";
+import { toggleCartHidden } from "../../redux/Cart/cart.actions";
 
 import "./cart-dropdown.styles.scss";
 
-const CartDropdown = ({ cartItems }) => (
+const CartDropdown = ({ cartItems, history, dispatch }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
-      {cartItems.map((cartItem) => (
-        <CartItem key={cartItem.id} item={cartItem} />
-      ))}
+      {cartItems.length ? (
+        cartItems.map((cartItem) => (
+          <CartItem key={cartItem.id} item={cartItem} />
+        ))
+      ) : (
+        <span className="empty-message">Your cart is empty</span>
+      )}
     </div>
-    <CustomButton inverted>GO TO CHECKOUT</CustomButton>
+    <CustomButton
+      onClick={() => {
+        history.push("/checkout");
+        dispatch(toggleCartHidden());
+      }}
+      inverted
+    >
+      GO TO CHECKOUT
+    </CustomButton>
   </div>
 );
 
@@ -31,4 +45,7 @@ const mapStateToProps = createStructuredSelector({
 });
 This was before reselect library */
 
-export default connect(mapStateToProps)(CartDropdown);
+//because of the connect that looks like this all props come in the components
+//example: dispatch
+export default withRouter(connect(mapStateToProps)(CartDropdown));
+//exp 136, min 8 gives us acces to History
